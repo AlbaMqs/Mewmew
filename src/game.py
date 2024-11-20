@@ -1,24 +1,23 @@
-#game.py
 import pygame
-from src.sprite import AnimatedSprite
+from src.player import Player
 
 class Game:
     def __init__(self, screen):
         self.screen = screen
         self.running = True
-        
-        self.animated_sprite = AnimatedSprite(
-            prefix="base_idle_down_", 
-            folder_path="assets/sprites/characters/base/", 
-            max_frames=7
-        )
+
+        # Créer un joueur
+        self.player = Player(name="base", x=100, y=100)
 
     def update(self, dt):
-        self.animated_sprite.update(dt)
+        # Gérer les entrées utilisateur et mettre à jour le joueur
+        self.player.handle_input(dt)
+        self.player.update(dt)
 
     def draw(self):
-        self.screen.fill((0, 0, 0))  # Exemple : fond noir
-        self.animated_sprite.draw(self.screen, 100, 100)  # Dessiner le sprite
+        # Dessiner le joueur
+        self.screen.fill((0, 0, 0))  # Fond noir
+        self.player.draw(self.screen)
 
     def handle_events(self):
         for event in pygame.event.get():

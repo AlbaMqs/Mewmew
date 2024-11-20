@@ -2,7 +2,7 @@ import os
 
 def renommer_images_plage(dossier, prefixe, plage_debut, plage_fin, nouveau_suffixe):
     """
-    Renomme les fichiers d'une plage spécifique de suffixes numériques.
+    Renomme les fichiers d'une plage spécifique de suffixes numériques en formatant les nouveaux noms à trois chiffres.
     
     Arguments :
     - dossier : chemin du dossier contenant les fichiers.
@@ -17,10 +17,8 @@ def renommer_images_plage(dossier, prefixe, plage_debut, plage_fin, nouveau_suff
     # Filtrer uniquement les fichiers qui existent dans le dossier
     fichiers = [f for f in fichiers_cibles if os.path.exists(os.path.join(dossier, f))]
     
-    # Calcul de la largeur pour le nouveau format
-    total = len(fichiers)
-    largeur = len(str(total - 1))
-    nouveau_format = f"{prefixe}_{nouveau_suffixe}_{{:0{largeur}d}}.png"
+    # Calcul de la largeur fixe pour un format à trois chiffres
+    nouveau_format = f"{prefixe}_{nouveau_suffixe}_{{:03d}}.png"
     
     for index, fichier in enumerate(fichiers):
         ancien_chemin = os.path.join(dossier, fichier)
@@ -34,8 +32,8 @@ def renommer_images_plage(dossier, prefixe, plage_debut, plage_fin, nouveau_suff
 # Exemple d'utilisation
 dossier = "assets/sprites/characters/base"  # Remplacez par le chemin de votre dossier
 prefixe = "base"  # Préfixe commun aux fichiers
-plage_debut = 0  # Numéro de début de la plage (ex : 015)
-plage_fin = 7  # Numéro de fin de la plage (ex : 045)
-nouveau_suffixe = "idle_down"  # Nouveau suffixe à ajouter
+plage_debut = 56  # Numéro de début de la plage (ex : 015)
+plage_fin = 63  # Numéro de fin de la plage (ex : 045)
+nouveau_suffixe = "run_left"  # Nouveau suffixe à ajouter
 
 renommer_images_plage(dossier, prefixe, plage_debut, plage_fin, nouveau_suffixe)

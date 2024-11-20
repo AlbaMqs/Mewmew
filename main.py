@@ -1,3 +1,5 @@
+#main.py
+
 from src.game import Game
 import pygame
 from settings import *
@@ -13,7 +15,8 @@ def main():
 
     while game.running:
         game.handle_events()
-        game.update()
+        dt = clock.tick(FPS)
+        game.update(dt)
         game.draw()
         pygame.display.flip()
         clock.tick(FPS)
